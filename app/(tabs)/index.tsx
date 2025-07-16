@@ -9,22 +9,24 @@ import { useState } from 'react';
 
 export default function HomeScreen() {
 
-  const [count,useCount]= useState<number>(0)
+ 
   const [name,setName] = useState<string>("")
+  const [arr,setArr] = useState([
+    {id:1,name:"long",age:18},
+    {id:2,name:"long1",age:19},
+    {id:3,name:"long2",age:20},
+    {id:4,name:"long3",age:21},
+    {id:5,name:"long4",age:22},
+  ])
 
   return (
     <View style={styles.reactText}>
-      <Button title='increase' onPress={()=>{useCount(count+1)}}>
-      </Button>
-      <Text style={{color:'red'}}>count : {count}</Text>
-      <View style={{flexDirection:"row"}}>
-        <Text style={{color:"white"}}>Your name</Text>
-      <TextInput style={styles.input} value={name} onChangeText={setName}></TextInput>
-      
-      </View>
-      <Button title='submit' onPress={()=> setName(name)}>
-      </Button>
-      <Text style={{color:"white"}}>Hello {name}</Text>
+      {arr.map((item) => (
+        <View key={item.id} style={{ marginBottom: 10}}>
+          <Text style={{color:"red",backgroundColor:"white"}}>Name: {item.name}</Text>
+          <Text style={{color:"red"}}>Age: {item.age}</Text>
+        </View>
+      ))}
     </View>
   );
 }
@@ -43,13 +45,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  input: {
-    borderColor: '#888',
-    width:100,
-    color:'white',
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
   },
 });
