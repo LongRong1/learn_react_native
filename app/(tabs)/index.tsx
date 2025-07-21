@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList } from 'react-native';
+import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList, Pressable } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -12,15 +12,26 @@ interface itodo{
   name:string
 }
 
+const reandomIn = (min:number,max:number)=>{
+  return Math.floor(Math.random()*(max - min))+min;
+}
+
 export default function HomeScreen() {
 
   const [todo, setTodo] = useState('')
   const [listtodo, setListTodo] = useState<itodo[]>([])
 
   const handleClick=()=>{
-    if(!todo) return;
-    setListTodo([...listtodo,{id:1,name:todo}]);
+    if(!todo) 
+      alert("emty")
+      return;
+    setListTodo([...listtodo,{id:reandomIn(1,100),name:todo}]);
     setTodo('')
+  }
+
+  const deleteTodo= (id:number)=>{
+    const newto = listtodo.filter(item=>item.id !== id)
+    setListTodo(newto)
   }
 
   return(
@@ -45,7 +56,9 @@ export default function HomeScreen() {
           keyExtractor={item => item.id+""}
           renderItem={({item}) =>{
             return(
-              <Text style={styles.todoItem}>{item.name}</Text>
+              <Pressable onPress={()=>deleteTodo(item.id)}>
+              <Text style={styles.todoItem} key={item.id}>{item.name}</Text>
+              </Pressable>
             )
 
           }}
