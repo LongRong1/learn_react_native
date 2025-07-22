@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList, Pressable } from 'react-native';
+import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -22,11 +22,13 @@ export default function HomeScreen() {
   const [listtodo, setListTodo] = useState<itodo[]>([])
 
   const handleClick=()=>{
-    if(!todo) 
+    if(!todo) {
       alert("emty")
       return;
-    setListTodo([...listtodo,{id:reandomIn(1,100),name:todo}]);
-    setTodo('')
+    }
+    else
+      {setListTodo([...listtodo,{id:reandomIn(1,100),name:todo}]);
+    setTodo('')}
   }
 
   const deleteTodo= (id:number)=>{
@@ -35,7 +37,10 @@ export default function HomeScreen() {
   }
 
   return(
+    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()
+    }}>
     <View style={styles.reactText}>
+      
       <Text style={{paddingTop:200}}>Long Ne</Text>
 
       <View id='input'>
@@ -65,6 +70,7 @@ export default function HomeScreen() {
         ></FlatList>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
