@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Platform, StyleSheet, View, Text, Button, TextInput, FlatList, Pressable, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -23,7 +23,17 @@ export default function HomeScreen() {
 
   const handleClick=()=>{
     if(!todo) {
-      alert("emty")
+      Alert.alert(
+        "Thong Bao",
+        "Khong duoc de trong",
+        // [
+        //   //{ text: "Cancel", onPress: () => console.log("Cancel Pressed") },
+        //   { text: "OK", onPress: () => console.log("OK Pressed") }
+        // ]
+        // [
+        //   {text:"OK"}
+        // ]
+      );
       return;
     }
     else
